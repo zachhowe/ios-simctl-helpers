@@ -22,3 +22,7 @@ Prints out value of specified environment variable in currently booted iOS simul
 	sim_openappcontainer <app bundle identifier>
 
 Opens in Finder the app container of specified app, which is installed in currently booted iOS simulator.
+
+	sim_deletealldevices
+
+Deletes all iOS simulator devices. Helpful if Xcode automatically creates a bunch of new devices you don't want.
