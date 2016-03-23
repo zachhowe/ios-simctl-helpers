@@ -1,2 +1,28 @@
 #!/bin/sh
-xcrun simctl list devices | grep "Booted" | egrep -o -i "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+
+CMD="$(basename "${BASH_SOURCE[0]}")"
+
+function printHelp() {
+    echo "Available commands:"
+    echo
+    echo "  booted                Prints the currently booted simulator's UUID"
+    echo "  delete_all_devices    Deletes all simulator devices"
+    echo "  getenv                Prints the value of an environment variable from the booted simulator"
+    echo "  open_app_container    Opens an app container for the booted simulator in Finder"
+    echo "  openurl               Opens a URL in the booted simulator"
+}
+
+SUBCOMMAND="$1"
+if [[ -z $SUBCOMMAND ]]; then
+    printHelp
+    exit 0
+fi
+
+SUBCOMMAND_TOOL="$CMD-$SUBCOMMAND"
+
+if [[ -z $(command -v "$SUBCOMMAND_TOOL") ]]; then
+    echo "$SUBCOMMAND_TOOL not found."
+    exit 1
+fi
+
+command $SUBCOMMAND_TOOL "${@:2}"    

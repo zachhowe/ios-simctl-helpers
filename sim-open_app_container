@@ -1,0 +1,2 @@
+#!/bin/sh
+open -R $(xcrun simctl get_app_container $(sim booted) $@)

@@ -1,2 +1,0 @@
-#!/bin/sh
-xcrun simctl getenv $(sim) $@
